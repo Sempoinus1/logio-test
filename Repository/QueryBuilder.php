@@ -1,7 +1,5 @@
 <?php
 
-require($_SERVER['DOCUMENT_ROOT'] . '/config/db.php');
-
 class QueryBuilder
 {
     private $fields = [];
@@ -41,9 +39,9 @@ class QueryBuilder
         return $this;
     }
 
-    public function __build(): string
+    public function __toString(): string
     {
-        $where = $this->condition === [] ? '' : ' WHERE' . implode(' AND ', $this->condition);
+        $where = $this->condition === [] ? '' : ' WHERE ' . $this->condition;
         return 'SELECT ' . implode(', ', $this->fields)
             . ' FROM ' . implode(', ', $this->from)
             . $where;

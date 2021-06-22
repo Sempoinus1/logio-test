@@ -1,6 +1,6 @@
 <?php
 
-class Product implements IMySQLDriver
+class Product
 {
     private $id;
     private $name;
@@ -46,11 +46,5 @@ class Product implements IMySQLDriver
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-
-    public function findProduct($id)
-    {
-        // TODO: Implement findProduct() method.
     }
 }
