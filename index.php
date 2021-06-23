@@ -2,4 +2,11 @@
 
 require("Controller/ProductController.php");
 
-var_dump((new ProductController)->detail(5));
+for ($i = 0; $i <= 5; $i++){
+    $p = (new ProductController)->detail($i);
+    if (empty($p))
+        echo "Not found <br/>";
+    else{
+        echo $p[key($p)]['id'] . ' => ' . $p[key($p)]['inquiry'] . "<br/>";
+    }
+}
