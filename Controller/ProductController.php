@@ -27,7 +27,7 @@ class ProductController implements IMySQLDriver
      */
     public function findProduct($id): array
     {
-        if(empty($this->verifyCache($id))) {
+        if(empty($this->getFromCache($id))) {
             $query = (new QueryBuilder())->select('*')->from('products')->where('id = ?');
             $statement = (new QueryBuilder())->createConn()->prepare($query);
             $statement->bindParam(1, $id, PDO::PARAM_INT);
@@ -50,7 +50,7 @@ class ProductController implements IMySQLDriver
             }
         }else{
             $this->addInquiry($id);
-            return $this->verifyCache($id);
+            return $this->getFromCache($id);
         }
         return array();
     }
@@ -60,7 +60,7 @@ class ProductController implements IMySQLDriver
      * @param $id
      * @return array
      */
-    private function verifyCache($id): array
+    private function getFromCache($id): array
     {
         $json = $this->getJSON();
         $filter = array_filter($json['products'], function ($products) use ($id) {return $products['id'] == $id;});
