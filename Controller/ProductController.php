@@ -79,12 +79,10 @@ class ProductController implements IMySQLDriver
     }
     private function getJSON(): array
     {
-        $file = file_get_contents("config/cache.json");
-        return json_decode($file,true);
+        return json_decode(file_get_contents("config/cache.json"),true);
     }
 
     private function setJSON($array){
-        $encode = json_encode($array);
-        file_put_contents("config/cache.json",$encode);
+        file_put_contents("config/cache.json",json_encode($array));
     }
 }
